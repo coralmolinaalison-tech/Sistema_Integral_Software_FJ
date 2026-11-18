@@ -4,7 +4,7 @@
 import re
 
 from entidades import EntidadSistema
-from excepción import DatosInvalidosError
+from excepciones import DatosInvalidosError
 
 
 class Cliente(EntidadSistema):
