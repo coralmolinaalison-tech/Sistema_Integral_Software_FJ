@@ -30,3 +30,4 @@ class ReservaInvalidaError(ErrorSistema):
 class OperacionNoPermitidaError(ErrorSistema):
     """Se genera cuando se intenta realizar una operación no permitida."""
     pass
+
