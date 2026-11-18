@@ -1,7 +1,6 @@
 
 # Excepciones personalizadas del sistema Software FJ
 
-
 class ErrorSistema(Exception):
     """Excepción base para los errores del sistema."""
     pass
