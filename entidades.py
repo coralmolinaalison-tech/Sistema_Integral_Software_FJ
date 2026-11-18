@@ -2,7 +2,7 @@
 # Clase abstracta para las entidades del sistema Software FJ
 
 from abc import ABC, abstractmethod
-from excepción import DatosInvalidosError
+from excepciones import DatosInvalidosError
 
 
 class EntidadSistema(ABC):
