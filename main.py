@@ -23,9 +23,7 @@ def ejecutar_operacion(descripcion, operacion):
 
     except Exception as error:
         print(f"Error controlado: {error}")
-        RegistroLogs.registrar_error(
-            f"{descripcion}: {error}"
-        )
+        RegistroLogs.registrar_error(f"{descripcion}: {error}")
 
     else:
         print("Operación realizada correctamente.")
@@ -115,8 +113,36 @@ def confirmar_reserva():
 
 
 def procesar_reserva():
-    costo = reservas[0].procesar(impuesto=19, descuento=0)
-    print(f"Costo total de la reserva: ${costo:,.0f}")
+    print("\nPruebas de cálculo de costos:")
+
+    servicio = reservas[0].servicio
+    duracion = reservas[0].duracion
+
+    costo_normal = servicio.calcular_costo(
+        duracion=duracion
+    )
+    print(f"Costo normal: ${costo_normal:,.0f}")
+
+    costo_impuesto = servicio.calcular_costo(
+        duracion=duracion,
+        impuesto=19
+    )
+    print(f"Costo con impuesto del 19%: ${costo_impuesto:,.0f}")
+
+    costo_descuento = servicio.calcular_costo(
+        duracion=duracion,
+        descuento=10
+    )
+    print(f"Costo con descuento del 10%: ${costo_descuento:,.0f}")
+
+    costo_completo = reservas[0].procesar(
+        impuesto=19,
+        descuento=10
+    )
+    print(
+        f"Costo final con impuesto y descuento: "
+        f"${costo_completo:,.0f}"
+    )
 
 
 def cancelar_reserva():
@@ -149,7 +175,10 @@ def main():
     )
 
     # Operaciones con clientes
-    ejecutar_operacion("1. Registrar cliente válido", registrar_cliente)
+    ejecutar_operacion(
+        "1. Registrar cliente válido",
+        registrar_cliente
+    )
 
     ejecutar_operacion(
         "2. Registrar cliente con correo inválido",
@@ -157,25 +186,46 @@ def main():
     )
 
     # Operaciones con servicios
-    ejecutar_operacion("3. Crear reserva de sala", crear_sala)
+    ejecutar_operacion(
+        "3. Crear reserva de sala",
+        crear_sala
+    )
 
     ejecutar_operacion(
         "4. Crear sala con capacidad inválida",
         crear_sala_invalida
     )
 
-    ejecutar_operacion("5. Crear alquiler de equipo", crear_equipo)
+    ejecutar_operacion(
+        "5. Crear alquiler de equipo",
+        crear_equipo
+    )
 
-    ejecutar_operacion("6. Crear asesoría especializada", crear_asesoria)
+    ejecutar_operacion(
+        "6. Crear asesoría especializada",
+        crear_asesoria
+    )
 
     # Operaciones con reservas
-    ejecutar_operacion("7. Crear reserva válida", crear_reserva)
+    ejecutar_operacion(
+        "7. Crear reserva válida",
+        crear_reserva
+    )
 
-    ejecutar_operacion("8. Confirmar reserva", confirmar_reserva)
+    ejecutar_operacion(
+        "8. Confirmar reserva",
+        confirmar_reserva
+    )
 
-    ejecutar_operacion("9. Procesar reserva", procesar_reserva)
+    ejecutar_operacion(
+        "9. Procesar reserva y probar variantes de costos",
+        procesar_reserva
+    )
 
-    ejecutar_operacion("10. Cancelar reserva", cancelar_reserva)
+    ejecutar_operacion(
+        "10. Intentar cancelar una reserva procesada",
+        cancelar_reserva
+    )
 
     ejecutar_operacion(
         "11. Intentar crear reserva con cliente inválido",
@@ -183,7 +233,7 @@ def main():
     )
 
     ejecutar_operacion(
-        "12. Intentar procesar una reserva cancelada",
+        "12. Intentar procesar una reserva ya procesada",
         procesar_reserva_cancelada
     )
 
@@ -203,10 +253,13 @@ def main():
 if __name__ == "__main__":
     try:
         main()
+
     except Exception as error:
         print(f"Error general del sistema: {error}")
         RegistroLogs.registrar_error(
             f"Error general: {error}"
         )
+
     finally:
         print("\nEjecución del programa finalizada.")
+
