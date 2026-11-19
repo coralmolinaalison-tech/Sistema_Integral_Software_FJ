@@ -4,7 +4,6 @@
 from clientes import Cliente
 from servicios import ReservaSala, AlquilerEquipo, AsesoriaEspecializada
 from reservas import Reserva
-from excepciones import DatosInvalidosError
 from logs import RegistroLogs
 
 
